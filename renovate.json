@@ -1,0 +1,40 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "assignees": [ "volker.raschek" ],
+  "labels": [ "renovate" ],
+  "packageRules": [
+    {
+      "addLabels": [ "renovate/droneci", "renovate/automerge" ],
+      "automerge": true,
+      "matchManagers": "droneci",
+      "matchUpdateTypes": [ "minor", "patch"]
+    },
+    {
+      "description": "Automatically update patch version of used container images in docker files",
+      "addLabels": [ "renovate/container-image", "renovate/automerge" ],
+      "automerge": true,
+      "matchBaseBranches": [ "master" ],
+      "matchManagers": [ "dockerfile" ],
+      "matchUpdateTypes": [ "patch" ]
+    },
+    {
+      "addLabels": [ "renovate/docker-compose", "renovate/automerge" ],
+      "automerge": false,
+      "matchPackageNames": [ "docker-compose" ],
+      "matchManagers": [ "regex" ]
+    }
+  ],
+  "rebaseLabel": "renovate/rebase",
+  "rebaseWhen": "behind-base-branch",
+  "regexManagers": [
+    {
+      "description": "Update version",
+      "fileMatch": [
+        "^Makefile$"
+      ],
+      "matchStrings": [
+        "DC_VERSION\\?=(?<currentValue>.*) # renovate: datasource=(?<datasource>.*) depName=(?<depName>.*)( lookupName=(?<lookupName>.*))?( versioning=(?<versioning>.*))?"
+      ]
+    }
+  ]
+}
