@@ -16,7 +16,6 @@ DC_IMAGE_NAMESPACE?=${DC_IMAGE_REGISTRY_USER}
 DC_IMAGE_NAME:=docker-compose
 DC_IMAGE_VERSION?=latest
 DC_IMAGE_FULLY_QUALIFIED=${DC_IMAGE_REGISTRY_NAME}/${DC_IMAGE_NAMESPACE}/${DC_IMAGE_NAME}:${DC_IMAGE_VERSION}
-DC_IMAGE_UNQUALIFIED=${DC_IMAGE_NAMESPACE}/${DC_IMAGE_NAME}:${DC_IMAGE_VERSION}
 
 # BUILD CONTAINER IMAGE
 # =====================================================================================================================
@@ -27,7 +26,6 @@ container-image/build:
 		--file Dockerfile \
 		--no-cache \
 		--pull \
-		--tag ${DC_IMAGE_FULLY_QUALIFIED} \
 		--tag ${DC_IMAGE_UNQUALIFIED} \
 		.
 
