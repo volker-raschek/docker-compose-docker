@@ -26,14 +26,14 @@ container-image/build:
 		--file Dockerfile \
 		--no-cache \
 		--pull \
-		--tag ${DC_IMAGE_UNQUALIFIED} \
+		--tag ${DC_IMAGE_FULLY_QUALIFIED} \
 		.
 
 # DELETE CONTAINER IMAGE
 # =====================================================================================================================
 PHONY:=container-image/delete
 container-image/delete:
-	- ${CONTAINER_RUNTIME} image rm ${DC_IMAGE_FULLY_QUALIFIED} ${DC_IMAGE_UNQUALIFIED}
+	- ${CONTAINER_RUNTIME} image rm ${DC_IMAGE_FULLY_QUALIFIED}
 	- ${CONTAINER_RUNTIME} image rm ${BASE_IMAGE_FULL}
 
 # PUSH CONTAINER IMAGE
