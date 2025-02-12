@@ -1,4 +1,4 @@
-FROM docker.io/library/golang:1.23.6-alpine3.20 AS build
+FROM docker.io/library/golang:1.24.0-alpine3.20 AS build
 
 ARG DC_VERSION=main
 
