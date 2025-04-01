@@ -9,8 +9,8 @@ CONTAINER_RUNTIME?=$(shell which podman)
 
 # DC_IMAGE_REGISTRY_NAME
 # Defines the name of the new container to be built using several variables.
-DC_IMAGE_REGISTRY_NAME:=git.cryptic.systems
-DC_IMAGE_REGISTRY_USER:=volker.raschek
+DC_IMAGE_REGISTRY_NAME?=git.cryptic.systems
+DC_IMAGE_REGISTRY_USER?=volker.raschek
 
 DC_IMAGE_NAMESPACE?=${DC_IMAGE_REGISTRY_USER}
 DC_IMAGE_NAME:=docker-compose
