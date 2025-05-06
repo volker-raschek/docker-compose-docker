@@ -21,7 +21,7 @@ jobs:
 
       - name: Build image
         run: |
-          TAG=$(echo ${{ github.ref_name }} | sed 's/v//gm')
+          TAG=latest
 
           docker buildx build \
             --platform linux/arm64 \
@@ -39,7 +39,7 @@ jobs:
 
       - name: Build image
         run: |
-          TAG=$(echo ${{ github.ref_name }} | sed 's/v//gm')
+          TAG=latest
 
           docker buildx build \
             --platform linux/amd64 \
