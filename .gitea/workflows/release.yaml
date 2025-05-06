@@ -77,3 +77,23 @@ jobs:
             --amend git.cryptic.systems/volker.raschek/docker-compose:${TAG}-arm64
 
           docker manifest push git.cryptic.systems/volker.raschek/docker-compose:${TAG}
+
+  sync-to-hub-docker-io:
+    needs:
+    - push-manifest
+    runs-on: ubuntu-latest
+    steps:
+    - name: Copy images to docker.io
+      run: |
+        TAG=$(echo ${{ github.ref_name }} | sed 's/v//gm')
+
+        apt-get update --yes
+        apt-get install --yes skopeo
+        skopeo copy \
+          --all \
+          --dest-password ${{ secrets.DOCKER_IO_PASSWORD }} \
+          --dest-username ${{ secrets.DOCKER_IO_USERNAME }} \
+          --src-password ${{ secrets.GIT_CRYPTIC_SYSTEMS_PACKAGE_REGISTRY_TOKEN }} \
+          --src-username volker.raschek \
+            docker://git.cryptic.systems/volker.raschek/docker-compose:${TAG} \
+            docker://docker.io/volkerraschek/docker-compose:${TAG}
