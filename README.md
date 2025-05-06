@@ -7,3 +7,15 @@ goal of this project is to package the binary `docker-compose` as container imag
 found in the upstream project of [docker/compose](https://github.com/docker/compose).
 
 The workflow or how `docker-compose` can in general be used is documented [here](https://docs.docker.com/compose/).
+Nevertheless, here are some examples of how to use the container image.
+
+```bash
+IMAGE_VERSION=2.34.0
+docker run \
+  --rm \
+  --volume ./path/to/docker-compose.yml:/workdir/docker-compose.yml:ro \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --workdir /workdir \
+    git.cryptic.systems/volker.raschek/docker-compose:${IMAGE_VERSION} \
+      ps
+```
