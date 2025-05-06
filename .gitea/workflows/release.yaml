@@ -46,7 +46,7 @@ jobs:
 
       - name: Build and push image
         run: |
-          TAG=$(echo ${{ github.ref_name }} | sed 's/v//gm')
+          TAG=$(semver ${{ github.ref_name }})
 
           docker buildx build \
             --platform linux/amd64 \
@@ -70,7 +70,7 @@ jobs:
 
       - name: Create and push manifest
         run: |
-          TAG=$(echo ${{ github.ref_name }} | sed 's/v//gm')
+          TAG=$(semver ${{ github.ref_name }})
 
           docker manifest create git.cryptic.systems/volker.raschek/docker-compose:${TAG} \
             --amend git.cryptic.systems/volker.raschek/docker-compose:${TAG}-amd64 \
@@ -85,10 +85,11 @@ jobs:
     steps:
     - name: Copy images to docker.io
       run: |
-        TAG=$(echo ${{ github.ref_name }} | sed 's/v//gm')
+        TAG=$(semver ${{ github.ref_name }})
 
         apt-get update --yes
         apt-get install --yes skopeo
+
         skopeo copy \
           --all \
           --dest-password ${{ secrets.DOCKER_IO_PASSWORD }} \
