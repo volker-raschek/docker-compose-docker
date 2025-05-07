@@ -1,5 +1,5 @@
 # DC_VERSION
-# Only required to install a specifiy version
+# Only required to install a specify version
 DC_VERSION?=v2.36.0 # renovate: datasource=github-releases depName=docker/compose
 
 # CONTAINER_RUNTIME
