@@ -1,4 +1,4 @@
-# docker-compose-docker
+# docker-compose
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/volkerraschek/docker-compose)](https://hub.docker.com/r/volkerraschek/docker-compose)
 
