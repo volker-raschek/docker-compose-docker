@@ -1,6 +1,6 @@
 # DC_VERSION
 # Only required to install a specify version
-DC_VERSION?=v2.37.1 # renovate: datasource=github-releases depName=docker/compose
+DC_VERSION?=v2.37.2 # renovate: datasource=github-releases depName=docker/compose
 
 # CONTAINER_RUNTIME
 # The CONTAINER_RUNTIME variable will be used to specified the path to a container runtime. This is needed to start and
