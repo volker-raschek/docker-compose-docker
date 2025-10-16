@@ -1,0 +1,40 @@
+name: Auto release
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+    - Makefile
+
+jobs:
+  tag_on_change:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5.0.0
+        with:
+          fetch-depth: 0
+      - name: Check if DC_VERSION line changed
+        id: check_change
+        run: |
+          echo "changed=false" >> $GITHUB_OUTPUT
+
+          for file in Makefile; do
+            if git diff HEAD~1 HEAD -- "${file}" | grep --quiet '^[+-]DC_VERSION'; then
+              echo "DC_VERSION line changed."
+              echo "changed=true" >> $GITHUB_OUTPUT
+              break
+            fi
+          done
+
+      - name: Stop if no change detected
+        if: steps.check_change.outputs.changed == 'false'
+        run: echo "No DC_VERSION change. Exiting..."
+
+      - name: Trigger "Push tagged images" workflow
+        if: steps.check_change.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@v4.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: push-tagged-images
