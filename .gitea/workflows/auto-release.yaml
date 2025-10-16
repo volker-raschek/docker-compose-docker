@@ -32,9 +32,42 @@ jobs:
         if: steps.check_change.outputs.changed == 'false'
         run: echo "No DC_VERSION change. Exiting..."
 
+      - name: Get latest tag
+        if: steps.check_change.outputs.changed == 'true'
+        id: get_tag
+        run: |
+          latest_tag=$(git tag --sort=-v:refname | grep --extended-regexp '^[0-9]+\.[0-9]+\.[0-9]+$' | head --lines 1 || echo "0.0.0")
+          echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
+          echo "Latest tag: $latest_tag"
+
+
+      - name: Increment patch version
+        if: steps.check_change.outputs.changed == 'true'
+        id: bump
+        run: |
+          latest_tag=${{ steps.get_tag.outputs.latest_tag }}
+          IFS='.' read -r major minor patch <<< "$latest_tag"
+          patch=$((patch + 1))
+          new_tag="${major}.${minor}.${patch}"
+          echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
+          echo "New tag: $new_tag"
+
+      - name: Create and push new tag
+        if: steps.check_change.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          new_tag=${{ steps.bump.outputs.new_tag }}
+          git tag -a "${new_tag}" -m "${new_tag}"
+          git push origin "${new_tag}"
+
       - name: Trigger "Push tagged images" workflow
         if: steps.check_change.outputs.changed == 'true'
         uses: peter-evans/repository-dispatch@v4.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           event-type: push-tagged-images
+          client-payload: |
+            {
+              "tag": "${{ steps.bump.outputs.new_tag }}"
+            }
