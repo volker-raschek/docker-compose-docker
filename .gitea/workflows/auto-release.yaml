@@ -59,8 +59,6 @@ jobs:
 
       - name: Create and push new tag
         if: steps.check_change.outputs.changed == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           new_tag=${{ steps.bump.outputs.new_tag }}
           git config --local user.name "${GIT_USER}"
@@ -72,9 +70,10 @@ jobs:
         if: steps.check_change.outputs.changed == 'true'
         uses: peter-evans/repository-dispatch@v4.0.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          event-type: push-tagged-images
           client-payload: |
             {
               "tag": "${{ steps.bump.outputs.new_tag }}"
             }
+          event-type: push-tagged-images
+          repository: ${{ github.repository }}
+          token: ${{ github.token }}
