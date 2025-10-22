@@ -16,12 +16,5 @@
     "local>volker.raschek/renovate-config:container#master",
     "local>volker.raschek/renovate-config:actions#master",
     "local>volker.raschek/renovate-config:regexp#master"
-  ],
-  "packageRules": [
-    {
-      "automerge": false,
-      "matchPackageNames": [ "docker-compose" ],
-      "matchManagers": [ "regex" ]
-    }
   ]
 }
