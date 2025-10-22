@@ -2,13 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "customManagers": [
     {
-      "fileMatch": ["^README\\.md$"],
+      "customType": "regex",
+      "fileMatch": [
+        "^README\\.md$"
+      ],
       "matchStrings": [
         "IMAGE_VERSION=(?<currentValue>.*)"
       ],
-      "depNameTemplate": "volker.raschek/docker-compose",
       "datasourceTemplate": "docker",
-      "registryUrlTemplate": "https://git.cryptic.systems"
+      "depNameTemplate": "volker.raschek/docker-compose",
+      "lookupNameTemplate": "git.cryptic.systems/volker.raschek/docker-compose",
+      "versioningTemplate": "semver"
     }
   ],
   "extends": [
@@ -23,8 +27,12 @@
         "renovate/automerge"
       ],
       "automerge": true,
-      "matchPackageNames": [ "docker-compose" ],
-      "matchManagers": [ "regex" ]
+      "matchPackageNames": [
+        "docker-compose"
+      ],
+      "matchManagers": [
+        "regex"
+      ]
     }
   ]
 }
