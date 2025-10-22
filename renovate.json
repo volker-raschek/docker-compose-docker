@@ -28,7 +28,7 @@
       ],
       "automerge": true,
       "matchPackageNames": [
-        "docker-compose"
+        "docker/compose"
       ],
       "matchManagers": [
         "regex"
