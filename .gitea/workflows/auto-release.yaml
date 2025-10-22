@@ -6,6 +6,10 @@ on:
     paths:
     - Makefile
 
+env:
+  GIT_EMAIL: noreply@cryptic.systems
+  GIT_USER: CSRBot
+
 jobs:
   tag_on_change:
     permissions:
@@ -15,6 +19,7 @@ jobs:
       - uses: actions/checkout@v5.0.0
         with:
           fetch-depth: 0
+
       - name: Check if DC_VERSION line changed
         id: check_change
         run: |
@@ -36,7 +41,7 @@ jobs:
         if: steps.check_change.outputs.changed == 'true'
         id: get_tag
         run: |
-          latest_tag=$(git tag --sort=-v:refname | grep --extended-regexp '^[0-9]+\.[0-9]+\.[0-9]+$' | head --lines 1 || echo "0.0.0")
+          latest_tag=$(git tag --sort=-v:refname | grep --extended-regexp '^v[0-9]+\.[0-9]+\.[0-9]+$' | head --lines 1 || echo "0.0.0")
           echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
           echo "Latest tag: $latest_tag"
 
@@ -58,6 +63,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           new_tag=${{ steps.bump.outputs.new_tag }}
+          git config --local user.name "${GIT_USERNAME}"
+          git config --local user.email "${GIT_EMAIL}"
           git tag -a "${new_tag}" -m "${new_tag}"
           git push origin "${new_tag}"
 
