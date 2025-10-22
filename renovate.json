@@ -4,7 +4,7 @@
     {
       "fileMatch": ["^README\\.md$"],
       "matchStrings": [
-        "VERSION=(?<currentValue>.*)"
+        "IMAGE_VERSION=(?<currentValue>.*)"
       ],
       "depNameTemplate": "volker.raschek/docker-compose",
       "datasourceTemplate": "docker",
