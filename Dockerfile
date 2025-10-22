@@ -1,6 +1,9 @@
 FROM docker.io/library/golang:1.25.3-alpine3.21 AS build
 
 ARG DC_VERSION=main
+ARG GONOSUMDB
+ARG GOPRIVATE
+ARG GOPROXY
 
 RUN set -ex && \
     apk update && \

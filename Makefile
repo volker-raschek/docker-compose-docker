@@ -17,12 +17,20 @@ DC_IMAGE_NAME:=docker-compose
 DC_IMAGE_VERSION?=latest
 DC_IMAGE_FULLY_QUALIFIED=${DC_IMAGE_REGISTRY_NAME}/${DC_IMAGE_NAMESPACE}/${DC_IMAGE_NAME}:${DC_IMAGE_VERSION}
 
+# Golang related environment variables
+GONOSUMDB?=
+GOPRIVATE?=
+GOPROXY?=
+
 # BUILD CONTAINER IMAGE
 # =====================================================================================================================
 PHONY:=container-image/build
 container-image/build:
 	${CONTAINER_RUNTIME} build \
 		--build-arg DC_VERSION=${DC_VERSION} \
+		--build-arg GONOSUMDB=${GONOSUMDB} \
+		--build-arg GOPRIVATE=${GOPRIVATE} \
+		--build-arg GOPROXY=${GOPROXY} \
 		--file Dockerfile \
 		--no-cache \
 		--pull \
