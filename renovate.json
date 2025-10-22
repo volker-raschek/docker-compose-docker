@@ -9,9 +9,8 @@
       "matchStrings": [
         "IMAGE_VERSION=(?<currentValue>.*)"
       ],
-      "datasourceTemplate": "docker",
-      "depNameTemplate": "volker.raschek/docker-compose",
-      "lookupNameTemplate": "git.cryptic.systems/volker.raschek/docker-compose",
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "docker/compose",
       "versioningTemplate": "semver"
     }
   ],
