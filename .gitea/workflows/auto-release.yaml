@@ -60,4 +60,4 @@ jobs:
             }
           event-type: push-tagged-images
           repository: ${{ github.repository }}
-          token: ${{ github.token }}
+          token: ${{ secrets.REPOSITORY_RW_TOKEN }}
