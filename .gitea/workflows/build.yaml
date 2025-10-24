@@ -1,5 +1,8 @@
 name: Build
 
+env:
+  GOPROXY: ${{ var.GOPROXY }}
+
 on:
   pull_request:
     types:

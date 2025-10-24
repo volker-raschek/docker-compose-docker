@@ -1,5 +1,8 @@
 name: Release
 
+env:
+  GOPROXY: ${{ var.GOPROXY }}
+
 on:
   push:
     tags:
