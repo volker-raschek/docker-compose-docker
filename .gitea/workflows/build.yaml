@@ -1,7 +1,9 @@
 name: Build
 
 env:
-  GOPROXY: ${{ var.GOPROXY }}
+  GONOSUMDB: ${{ vars.GONOSUMDB }}
+  GOPRIVATE: ${{ vars.GOPRIVATE }}
+  GOPROXY: ${{ vars.GOPROXY }}
 
 on:
   pull_request:

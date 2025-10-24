@@ -1,7 +1,7 @@
 name: Release
 
 env:
-  GOPROXY: ${{ var.GOPROXY }}
+  GOPROXY: ${{ vars.GOPROXY }}
 
 on:
   push:
