@@ -65,6 +65,6 @@ jobs:
                 workflow_id: workflowFileName,
                 ref: defaultBranch,
                 inputs: {
-                  tag: "definedTag"
+                  tag: definedTag
                 }
             });
