@@ -39,6 +39,7 @@ jobs:
         run: echo "No DC_VERSION change. Exiting..."
 
       - name: Create and push new tag
+        id: create_tag
         if: steps.check_change.outputs.changed == 'true'
         run: |
           defined_tag="$(grep --only-matching --perl-regexp 'DC_VERSION\?=v?[\d]*(\.[\d]*){0,2}' Makefile | cut --delimiter='=' --fields=2)"
