@@ -11,7 +11,7 @@ The workflow or how `docker-compose` can in general be used is documented at
 image.
 
 ```bash
-IMAGE_VERSION=2.40.2
+IMAGE_VERSION=2.34.0
 docker run \
   --rm \
   --volume ./path/to/docker-compose.yml:/workdir/docker-compose.yml:ro \
