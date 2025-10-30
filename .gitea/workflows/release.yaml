@@ -47,6 +47,7 @@ jobs:
       - name: Build and push image
         run: |
           docker buildx build \
+            --build-arg DC_VERSION=${{ steps.version_extraction.outputs.version_raw }} \
             --build-arg GONOSUMDB=${GONOSUMDB} \
             --build-arg GOPRIVATE=${GOPRIVATE} \
             --build-arg GOPROXY=${GOPROXY} \
@@ -89,6 +90,7 @@ jobs:
       - name: Build and push image
         run: |
           docker buildx build \
+            --build-arg DC_VERSION=${{ steps.version_extraction.outputs.version_raw }} \
             --build-arg GONOSUMDB=${GONOSUMDB} \
             --build-arg GOPRIVATE=${GOPRIVATE} \
             --build-arg GOPROXY=${GOPROXY} \
