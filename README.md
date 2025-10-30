@@ -14,9 +14,9 @@ image.
 IMAGE_VERSION=2.40.3
 docker run \
   --rm \
-  --volume ./path/to/docker-compose.yml:/workdir/docker-compose.yml:ro \
+  --volume "$(pwd):$(pwd)" \
   --volume /var/run/docker.sock:/var/run/docker.sock \
-  --workdir /workdir \
-    git.cryptic.systems/volker.raschek/docker-compose:${IMAGE_VERSION} \
-      ps
+  --workdir "$(pwd)" \
+    "git.cryptic.systems/volker.raschek/docker-compose:${IMAGE_VERSION}" \
+      version
 ```
