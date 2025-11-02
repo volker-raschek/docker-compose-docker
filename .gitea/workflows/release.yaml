@@ -51,11 +51,11 @@ jobs:
             --build-arg GONOSUMDB=${GONOSUMDB} \
             --build-arg GOPRIVATE=${GOPRIVATE} \
             --build-arg GOPROXY=${GOPROXY} \
-            --platform linux/arm64 \
             --file Dockerfile \
+            --platform linux/arm64 \
             --provenance false \
-            --tag git.cryptic.systems/volker.raschek/docker-compose:${{ steps.version_extraction.outputs.version_cleaned }}-arm64 \
             --push \
+            --tag git.cryptic.systems/volker.raschek/docker-compose:${{ steps.version_extraction.outputs.version_cleaned }}-arm64 \
             .
 
   push-amd64:
@@ -94,11 +94,11 @@ jobs:
             --build-arg GONOSUMDB=${GONOSUMDB} \
             --build-arg GOPRIVATE=${GOPRIVATE} \
             --build-arg GOPROXY=${GOPROXY} \
-            --platform linux/amd64 \
             --file Dockerfile \
+            --platform linux/amd64 \
             --provenance false \
-            --tag git.cryptic.systems/volker.raschek/docker-compose:${{ steps.version_extraction.outputs.version_cleaned }}-amd64 \
             --push \
+            --tag git.cryptic.systems/volker.raschek/docker-compose:${{ steps.version_extraction.outputs.version_cleaned }}-amd64 \
             .
 
   push-manifest:
