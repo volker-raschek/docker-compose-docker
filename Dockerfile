@@ -14,7 +14,7 @@ RUN git clone https://github.com/docker/compose.git --branch ${DC_VERSION} docke
     cd docker-compose && \
     make DESTDIR=/cache
 
-FROM docker.io/library/alpine:3.22
+FROM docker.io/library/alpine:3.23
 
 COPY --from=build /cache/docker-compose /usr/bin/docker-compose
 
