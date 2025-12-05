@@ -1,6 +1,6 @@
 FROM docker.io/library/ubuntu:24.04 AS download
 
-ARG DC_VERSION=v2.40.3
+ARG DC_VERSION=v5.0.0
 
 RUN NAME=docker-compose-$(uname | tr [:upper:] [:lower:])-$(uname -m); \
     apt update --yes && \
