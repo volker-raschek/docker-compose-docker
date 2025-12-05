@@ -1,21 +1,24 @@
-FROM docker.io/library/golang:1.25.5-alpine3.21 AS build
+FROM docker.io/library/ubuntu:24.04 AS download
 
-ARG DC_VERSION=main
-ARG GONOSUMDB
-ARG GOPRIVATE
-ARG GOPROXY
+# renovate: datasource=github-releases depName=docker/compose
+ARG DC_VERSION=v2.40.3
 
-RUN set -ex && \
-    apk update && \
-    apk upgrade && \
-    apk add git make
+RUN NAME=docker-compose-$(uname | tr [:upper:] [:lower:])-$(uname -m); \
+    apt update --yes && \
+    apt install --yes curl && \
+    curl \
+      --fail \
+      --output "/tmp/${NAME}" \
+      --location "https://github.com/docker/compose/releases/download/${DC_VERSION}/${NAME}" && \
+    curl \
+      --fail \
+      --output /tmp/checksums.txt \
+      --location "https://github.com/docker/compose/releases/download/${DC_VERSION}/checksums.txt" && \
+    (cd /tmp && sha256sum --ignore-missing --check checksums.txt) && \
+    ln -s "${NAME}" /tmp/docker-compose && \
+    chmod +x /tmp/docker-compose
 
-RUN git clone https://github.com/docker/compose.git --branch ${DC_VERSION} docker-compose && \
-    cd docker-compose && \
-    make DESTDIR=/cache
+FROM scratch
 
-FROM docker.io/library/alpine:3.23
-
-COPY --from=build /cache/docker-compose /usr/bin/docker-compose
-
+COPY --from=download /tmp/docker-compose /usr/bin/docker-compose
 ENTRYPOINT [ "/usr/bin/docker-compose" ]

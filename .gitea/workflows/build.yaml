@@ -1,10 +1,5 @@
 name: Build
 
-env:
-  GONOSUMDB: ${{ vars.GONOSUMDB }}
-  GOPRIVATE: ${{ vars.GOPRIVATE }}
-  GOPROXY: ${{ vars.GOPROXY }}
-
 on:
   pull_request:
     types:
@@ -29,9 +24,6 @@ jobs:
           TAG=latest
 
           docker buildx build \
-            --build-arg GONOSUMDB=${GONOSUMDB} \
-            --build-arg GOPRIVATE=${GOPRIVATE} \
-            --build-arg GOPROXY=${GOPROXY} \
             --platform linux/arm64 \
             --file Dockerfile \
             --provenance false \
@@ -50,9 +42,6 @@ jobs:
           TAG=latest
 
           docker buildx build \
-            --build-arg GONOSUMDB=${GONOSUMDB} \
-            --build-arg GOPRIVATE=${GOPRIVATE} \
-            --build-arg GOPROXY=${GOPROXY} \
             --platform linux/amd64 \
             --file Dockerfile \
             --provenance false \

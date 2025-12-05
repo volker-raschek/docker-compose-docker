@@ -1,8 +1,5 @@
 name: Release
 
-env:
-  GOPROXY: ${{ vars.GOPROXY }}
-
 on:
   push:
     tags:
@@ -48,9 +45,6 @@ jobs:
         run: |
           docker buildx build \
             --build-arg DC_VERSION=${{ steps.version_extraction.outputs.version_raw }} \
-            --build-arg GONOSUMDB=${GONOSUMDB} \
-            --build-arg GOPRIVATE=${GOPRIVATE} \
-            --build-arg GOPROXY=${GOPROXY} \
             --file Dockerfile \
             --platform linux/arm64 \
             --provenance false \
@@ -91,9 +85,6 @@ jobs:
         run: |
           docker buildx build \
             --build-arg DC_VERSION=${{ steps.version_extraction.outputs.version_raw }} \
-            --build-arg GONOSUMDB=${GONOSUMDB} \
-            --build-arg GOPRIVATE=${GOPRIVATE} \
-            --build-arg GOPROXY=${GOPROXY} \
             --file Dockerfile \
             --platform linux/amd64 \
             --provenance false \

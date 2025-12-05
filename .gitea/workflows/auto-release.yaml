@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "master" ]
     paths:
-    - Makefile
+    - Dockerfile
 
 env:
   GIT_EMAIL: noreply@cryptic.systems
@@ -26,8 +26,8 @@ jobs:
         run: |
           echo "changed=false" >> $GITHUB_OUTPUT
 
-          for file in Makefile; do
-            if git diff HEAD~1 HEAD -- "${file}" | grep --quiet '^[+-]DC_VERSION'; then
+          for file in Dockerfile; do
+            if git diff HEAD~1 HEAD -- "${file}" | grep --quiet '^[+-]ARG DC_VERSION'; then
               echo "DC_VERSION line changed."
               echo "changed=true" >> $GITHUB_OUTPUT
               break
@@ -42,7 +42,7 @@ jobs:
         id: create_tag
         if: steps.check_change.outputs.changed == 'true'
         run: |
-          defined_tag="$(grep --only-matching --perl-regexp 'DC_VERSION\?=v?[\d]*(\.[\d]*){0,2}' Makefile | cut --delimiter='=' --fields=2)"
+          defined_tag="$(grep --only-matching --perl-regexp 'ARG DC_VERSION=v?[\d]*(\.[\d]*){0,2}' Dockerfile | cut --delimiter='=' --fields=2)"
 
           echo "defined_tag=${defined_tag}" >> $GITHUB_OUTPUT
           echo "New tag: ${defined_tag}"
