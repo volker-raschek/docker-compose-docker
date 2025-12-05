@@ -4,9 +4,11 @@
     {
       "customType": "regex",
       "fileMatch": [
+        "^Dockerfile$",
         "^README\\.md$"
       ],
       "matchStrings": [
+        "ARG DC_VERSION=(?<currentValue>.*)",
         "IMAGE_VERSION=(?<currentValue>.*)"
       ],
       "datasourceTemplate": "github-releases",

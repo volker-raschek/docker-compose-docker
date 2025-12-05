@@ -1,6 +1,5 @@
 FROM docker.io/library/ubuntu:24.04 AS download
 
-# renovate: datasource=github-releases depName=docker/compose
 ARG DC_VERSION=v2.40.3
 
 RUN NAME=docker-compose-$(uname | tr [:upper:] [:lower:])-$(uname -m); \
