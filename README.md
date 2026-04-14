@@ -11,7 +11,7 @@ The workflow or how `docker-compose` can in general be used is documented at
 image.
 
 ```bash
-IMAGE_VERSION=5.1.0
+IMAGE_VERSION=5.1.2
 docker run \
   --rm \
   --volume "$(pwd):$(pwd)" \
