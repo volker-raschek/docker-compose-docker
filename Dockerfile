@@ -1,4 +1,4 @@
-FROM docker.io/library/ubuntu:24.04 AS download
+FROM docker.io/library/ubuntu:26.04 AS download
 
 ARG DC_VERSION=v5.1.3
 
