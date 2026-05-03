@@ -19,5 +19,8 @@ RUN NAME=docker-compose-$(uname | tr [:upper:] [:lower:])-$(uname -m); \
 
 FROM scratch
 
+LABEL org.opencontainers.image.description="Define and run multi-container applications with Docker" \
+      io.artifacthub.package.readme-url="https://github.com/docker/compose"
+
 COPY --from=download /tmp/docker-compose /usr/bin/docker-compose
 ENTRYPOINT [ "/usr/bin/docker-compose" ]
