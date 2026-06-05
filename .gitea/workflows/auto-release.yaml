@@ -1,4 +1,4 @@
-name: Auto release
+name: Auto release tagged
 
 on:
   push:
@@ -58,7 +58,7 @@ jobs:
         uses: actions/github-script@v9.0.0
         with:
           script: |
-            const workflowFileName = 'release.yaml';
+            const workflowFileName = 'release-tagged.yaml';
             const defaultBranch = context.payload.repository.default_branch;
             const definedTag = '${{ steps.create_tag.outputs.defined_tag }}';
 
