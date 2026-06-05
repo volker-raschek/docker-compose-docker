@@ -3,6 +3,7 @@ name: Release latest
 on:
   push:
     branches: [ "master" ]
+  workflow_dispatch: {}
 
 jobs:
   push-arm64:
