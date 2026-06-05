@@ -44,7 +44,7 @@ jobs:
       - name: Build and push image
         run: |
           docker buildx build \
-            --build-arg BUILD_DATE="$(date --rfc-3339 seconds)" \
+            --build-arg BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
             --build-arg DC_VERSION=${{ steps.version_extraction.outputs.version_raw }} \
             --file Dockerfile \
             --platform linux/arm64 \
@@ -85,7 +85,7 @@ jobs:
       - name: Build and push image
         run: |
           docker buildx build \
-            --build-arg BUILD_DATE="$(date --rfc-3339 seconds)" \
+            --build-arg BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
             --build-arg DC_VERSION=${{ steps.version_extraction.outputs.version_raw }} \
             --file Dockerfile \
             --platform linux/amd64 \

@@ -22,7 +22,7 @@ jobs:
       - name: Build and push image
         run: |
           docker buildx build \
-            --build-arg BUILD_DATE="$(date --rfc-3339 seconds)" \
+            --build-arg BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
             --file Dockerfile \
             --platform linux/arm64 \
             --provenance false \
@@ -47,7 +47,7 @@ jobs:
       - name: Build and push image
         run: |
           docker buildx build \
-            --build-arg BUILD_DATE="$(date --rfc-3339 seconds)" \
+            --build-arg BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
             --file Dockerfile \
             --platform linux/amd64 \
             --provenance false \
