@@ -18,6 +18,7 @@ DC_IMAGE_FULLY_QUALIFIED=${DC_IMAGE_REGISTRY_NAME}/${DC_IMAGE_NAMESPACE}/${DC_IM
 PHONY:=container-image/build
 container-image/build:
 	${CONTAINER_RUNTIME} build \
+		--build-arg BUILD_DATE="$(shell date --rfc-3339 seconds)" \
 		--file Dockerfile \
 		--no-cache \
 		--pull \
