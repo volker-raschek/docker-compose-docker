@@ -22,7 +22,7 @@ FROM scratch
 ARG DC_VERSION=v5.1.4
 ARG BUILD_DATE
 
-LABEL io.artifacthub.package.readme-url="https://github.com/docker/compose" \
+LABEL io.artifacthub.package.readme-url="https://raw.githubusercontent.com/docker/compose/refs/tags/${DC_VERSION}/README.md" \
       org.opencontainers.image.created="${BUILD_DATE}" \
       org.opencontainers.image.description="Define and run multi-container applications with Docker" \
       org.opencontainers.image.version=${DC_VERSION}
