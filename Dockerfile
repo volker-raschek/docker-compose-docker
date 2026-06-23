@@ -1,6 +1,6 @@
 FROM docker.io/library/ubuntu:26.04 AS download
 
-ARG DC_VERSION=v5.1.4
+ARG DC_VERSION=v5.2.0
 
 RUN NAME=docker-compose-$(uname | tr [:upper:] [:lower:])-$(uname -m); \
     apt update --yes && \
@@ -19,7 +19,7 @@ RUN NAME=docker-compose-$(uname | tr [:upper:] [:lower:])-$(uname -m); \
 
 FROM scratch
 
-ARG DC_VERSION=v5.1.4
+ARG DC_VERSION=v5.2.0
 ARG BUILD_DATE
 
 LABEL io.artifacthub.package.readme-url="https://raw.githubusercontent.com/docker/compose/refs/tags/${DC_VERSION}/README.md" \
